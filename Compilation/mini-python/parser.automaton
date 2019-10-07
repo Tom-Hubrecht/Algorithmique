@@ -1,0 +1,1339 @@
+State 0:
+file' -> . file [ # ]
+-- On NEWLINE shift to state 1
+-- On option(NEWLINE) shift to state 2
+-- On file shift to state 96
+-- On RETURN reduce production option(NEWLINE) -> 
+-- On PRINT reduce production option(NEWLINE) -> 
+-- On NOT reduce production option(NEWLINE) -> 
+-- On MINUS reduce production option(NEWLINE) -> 
+-- On LSQ reduce production option(NEWLINE) -> 
+-- On LP reduce production option(NEWLINE) -> 
+-- On IF reduce production option(NEWLINE) -> 
+-- On IDENT reduce production option(NEWLINE) -> 
+-- On FOR reduce production option(NEWLINE) -> 
+-- On DEF reduce production option(NEWLINE) -> 
+-- On CST reduce production option(NEWLINE) -> 
+
+State 1:
+option(NEWLINE) -> NEWLINE . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On RETURN reduce production option(NEWLINE) -> NEWLINE 
+-- On PRINT reduce production option(NEWLINE) -> NEWLINE 
+-- On NOT reduce production option(NEWLINE) -> NEWLINE 
+-- On MINUS reduce production option(NEWLINE) -> NEWLINE 
+-- On LSQ reduce production option(NEWLINE) -> NEWLINE 
+-- On LP reduce production option(NEWLINE) -> NEWLINE 
+-- On IF reduce production option(NEWLINE) -> NEWLINE 
+-- On IDENT reduce production option(NEWLINE) -> NEWLINE 
+-- On FOR reduce production option(NEWLINE) -> NEWLINE 
+-- On DEF reduce production option(NEWLINE) -> NEWLINE 
+-- On CST reduce production option(NEWLINE) -> NEWLINE 
+
+State 2:
+file -> option(NEWLINE) . list(def) nonempty_list(stmt) EOF [ # ]
+-- On DEF shift to state 3
+-- On list(def) shift to state 91
+-- On def shift to state 94
+-- On RETURN reduce production list(def) -> 
+-- On PRINT reduce production list(def) -> 
+-- On NOT reduce production list(def) -> 
+-- On MINUS reduce production list(def) -> 
+-- On LSQ reduce production list(def) -> 
+-- On LP reduce production list(def) -> 
+-- On IF reduce production list(def) -> 
+-- On IDENT reduce production list(def) -> 
+-- On FOR reduce production list(def) -> 
+-- On CST reduce production list(def) -> 
+
+State 3:
+def -> DEF . ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On IDENT shift to state 4
+-- On ident shift to state 5
+
+State 4:
+ident -> IDENT . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ LP IN EQUAL DIV COMMA COLON CMP AND ]
+-- On TIMES reduce production ident -> IDENT 
+-- On RSQ reduce production ident -> IDENT 
+-- On RP reduce production ident -> IDENT 
+-- On PLUS reduce production ident -> IDENT 
+-- On OR reduce production ident -> IDENT 
+-- On NEWLINE reduce production ident -> IDENT 
+-- On MOD reduce production ident -> IDENT 
+-- On MINUS reduce production ident -> IDENT 
+-- On LSQ reduce production ident -> IDENT 
+-- On LP reduce production ident -> IDENT 
+-- On IN reduce production ident -> IDENT 
+-- On EQUAL reduce production ident -> IDENT 
+-- On DIV reduce production ident -> IDENT 
+-- On COMMA reduce production ident -> IDENT 
+-- On COLON reduce production ident -> IDENT 
+-- On CMP reduce production ident -> IDENT 
+-- On AND reduce production ident -> IDENT 
+
+State 5:
+def -> DEF ident . LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On LP shift to state 6
+
+State 6:
+def -> DEF ident LP . loption(separated_nonempty_list(COMMA,ident)) RP COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On IDENT shift to state 4
+-- On separated_nonempty_list(COMMA,ident) shift to state 7
+-- On loption(separated_nonempty_list(COMMA,ident)) shift to state 8
+-- On ident shift to state 88
+-- On RP reduce production loption(separated_nonempty_list(COMMA,ident)) -> 
+
+State 7:
+loption(separated_nonempty_list(COMMA,ident)) -> separated_nonempty_list(COMMA,ident) . [ RP ]
+-- On RP reduce production loption(separated_nonempty_list(COMMA,ident)) -> separated_nonempty_list(COMMA,ident) 
+
+State 8:
+def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) . RP COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On RP shift to state 9
+
+State 9:
+def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP . COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On COLON shift to state 10
+
+State 10:
+def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON . suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On NEWLINE shift to state 55
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On suite shift to state 87
+-- On simple_stmt shift to state 64
+-- On ident shift to state 66
+-- On expr shift to state 69
+
+State 11:
+simple_stmt -> RETURN . expr [ NEWLINE ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 50
+
+State 12:
+expr -> NOT . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 49
+
+State 13:
+expr -> MINUS . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 48
+
+State 14:
+expr -> LSQ . loption(separated_nonempty_list(COMMA,expr)) RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On separated_nonempty_list(COMMA,expr) shift to state 19
+-- On loption(separated_nonempty_list(COMMA,expr)) shift to state 46
+-- On ident shift to state 17
+-- On expr shift to state 22
+-- On RSQ reduce production loption(separated_nonempty_list(COMMA,expr)) -> 
+
+State 15:
+expr -> LP . expr RP [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 44
+
+State 16:
+expr -> CST . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES reduce production expr -> CST 
+-- On RSQ reduce production expr -> CST 
+-- On RP reduce production expr -> CST 
+-- On PLUS reduce production expr -> CST 
+-- On OR reduce production expr -> CST 
+-- On NEWLINE reduce production expr -> CST 
+-- On MOD reduce production expr -> CST 
+-- On MINUS reduce production expr -> CST 
+-- On LSQ reduce production expr -> CST 
+-- On DIV reduce production expr -> CST 
+-- On COMMA reduce production expr -> CST 
+-- On COLON reduce production expr -> CST 
+-- On CMP reduce production expr -> CST 
+-- On AND reduce production expr -> CST 
+
+State 17:
+expr -> ident . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> ident . LP loption(separated_nonempty_list(COMMA,expr)) RP [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On LP shift to state 18
+-- On TIMES reduce production expr -> ident 
+-- On RSQ reduce production expr -> ident 
+-- On RP reduce production expr -> ident 
+-- On PLUS reduce production expr -> ident 
+-- On OR reduce production expr -> ident 
+-- On NEWLINE reduce production expr -> ident 
+-- On MOD reduce production expr -> ident 
+-- On MINUS reduce production expr -> ident 
+-- On LSQ reduce production expr -> ident 
+-- On DIV reduce production expr -> ident 
+-- On COMMA reduce production expr -> ident 
+-- On COLON reduce production expr -> ident 
+-- On CMP reduce production expr -> ident 
+-- On AND reduce production expr -> ident 
+
+State 18:
+expr -> ident LP . loption(separated_nonempty_list(COMMA,expr)) RP [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On separated_nonempty_list(COMMA,expr) shift to state 19
+-- On loption(separated_nonempty_list(COMMA,expr)) shift to state 20
+-- On ident shift to state 17
+-- On expr shift to state 22
+-- On RP reduce production loption(separated_nonempty_list(COMMA,expr)) -> 
+
+State 19:
+loption(separated_nonempty_list(COMMA,expr)) -> separated_nonempty_list(COMMA,expr) . [ RSQ RP ]
+-- On RSQ reduce production loption(separated_nonempty_list(COMMA,expr)) -> separated_nonempty_list(COMMA,expr) 
+-- On RP reduce production loption(separated_nonempty_list(COMMA,expr)) -> separated_nonempty_list(COMMA,expr) 
+
+State 20:
+expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) . RP [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On RP shift to state 21
+
+State 21:
+expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On RSQ reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On RP reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On PLUS reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On OR reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On NEWLINE reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On MOD reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On MINUS reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On LSQ reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On DIV reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On COMMA reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On COLON reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On CMP reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+-- On AND reduce production expr -> ident LP loption(separated_nonempty_list(COMMA,expr)) RP 
+
+State 22:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR MOD MINUS LSQ DIV COMMA CMP AND ]
+separated_nonempty_list(COMMA,expr) -> expr . [ RSQ RP ]
+separated_nonempty_list(COMMA,expr) -> expr . COMMA separated_nonempty_list(COMMA,expr) [ RSQ RP ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On COMMA shift to state 42
+-- On CMP shift to state 38
+-- On AND shift to state 40
+-- On RSQ reduce production separated_nonempty_list(COMMA,expr) -> expr 
+-- On RP reduce production separated_nonempty_list(COMMA,expr) -> expr 
+
+State 23:
+expr -> expr TIMES . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 24
+
+State 24:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr TIMES expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On LSQ shift to state 25
+-- On TIMES reduce production expr -> expr TIMES expr 
+-- On RSQ reduce production expr -> expr TIMES expr 
+-- On RP reduce production expr -> expr TIMES expr 
+-- On PLUS reduce production expr -> expr TIMES expr 
+-- On OR reduce production expr -> expr TIMES expr 
+-- On NEWLINE reduce production expr -> expr TIMES expr 
+-- On MOD reduce production expr -> expr TIMES expr 
+-- On MINUS reduce production expr -> expr TIMES expr 
+-- On DIV reduce production expr -> expr TIMES expr 
+-- On COMMA reduce production expr -> expr TIMES expr 
+-- On COLON reduce production expr -> expr TIMES expr 
+-- On CMP reduce production expr -> expr TIMES expr 
+-- On AND reduce production expr -> expr TIMES expr 
+
+State 25:
+expr -> expr LSQ . expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 26
+
+State 26:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr LSQ expr . RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+-- On TIMES shift to state 23
+-- On RSQ shift to state 27
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+
+State 27:
+expr -> expr LSQ expr RSQ . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES reduce production expr -> expr LSQ expr RSQ 
+-- On RSQ reduce production expr -> expr LSQ expr RSQ 
+-- On RP reduce production expr -> expr LSQ expr RSQ 
+-- On PLUS reduce production expr -> expr LSQ expr RSQ 
+-- On OR reduce production expr -> expr LSQ expr RSQ 
+-- On NEWLINE reduce production expr -> expr LSQ expr RSQ 
+-- On MOD reduce production expr -> expr LSQ expr RSQ 
+-- On MINUS reduce production expr -> expr LSQ expr RSQ 
+-- On LSQ reduce production expr -> expr LSQ expr RSQ 
+-- On DIV reduce production expr -> expr LSQ expr RSQ 
+-- On COMMA reduce production expr -> expr LSQ expr RSQ 
+-- On COLON reduce production expr -> expr LSQ expr RSQ 
+-- On CMP reduce production expr -> expr LSQ expr RSQ 
+-- On AND reduce production expr -> expr LSQ expr RSQ 
+
+State 28:
+expr -> expr PLUS . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 29
+
+State 29:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr PLUS expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On MOD shift to state 30
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On RSQ reduce production expr -> expr PLUS expr 
+-- On RP reduce production expr -> expr PLUS expr 
+-- On PLUS reduce production expr -> expr PLUS expr 
+-- On OR reduce production expr -> expr PLUS expr 
+-- On NEWLINE reduce production expr -> expr PLUS expr 
+-- On MINUS reduce production expr -> expr PLUS expr 
+-- On COMMA reduce production expr -> expr PLUS expr 
+-- On COLON reduce production expr -> expr PLUS expr 
+-- On CMP reduce production expr -> expr PLUS expr 
+-- On AND reduce production expr -> expr PLUS expr 
+
+State 30:
+expr -> expr MOD . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 31
+
+State 31:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr MOD expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On LSQ shift to state 25
+-- On TIMES reduce production expr -> expr MOD expr 
+-- On RSQ reduce production expr -> expr MOD expr 
+-- On RP reduce production expr -> expr MOD expr 
+-- On PLUS reduce production expr -> expr MOD expr 
+-- On OR reduce production expr -> expr MOD expr 
+-- On NEWLINE reduce production expr -> expr MOD expr 
+-- On MOD reduce production expr -> expr MOD expr 
+-- On MINUS reduce production expr -> expr MOD expr 
+-- On DIV reduce production expr -> expr MOD expr 
+-- On COMMA reduce production expr -> expr MOD expr 
+-- On COLON reduce production expr -> expr MOD expr 
+-- On CMP reduce production expr -> expr MOD expr 
+-- On AND reduce production expr -> expr MOD expr 
+
+State 32:
+expr -> expr DIV . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 33
+
+State 33:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr DIV expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On LSQ shift to state 25
+-- On TIMES reduce production expr -> expr DIV expr 
+-- On RSQ reduce production expr -> expr DIV expr 
+-- On RP reduce production expr -> expr DIV expr 
+-- On PLUS reduce production expr -> expr DIV expr 
+-- On OR reduce production expr -> expr DIV expr 
+-- On NEWLINE reduce production expr -> expr DIV expr 
+-- On MOD reduce production expr -> expr DIV expr 
+-- On MINUS reduce production expr -> expr DIV expr 
+-- On DIV reduce production expr -> expr DIV expr 
+-- On COMMA reduce production expr -> expr DIV expr 
+-- On COLON reduce production expr -> expr DIV expr 
+-- On CMP reduce production expr -> expr DIV expr 
+-- On AND reduce production expr -> expr DIV expr 
+
+State 34:
+expr -> expr OR . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 35
+
+State 35:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr OR expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+-- On RSQ reduce production expr -> expr OR expr 
+-- On RP reduce production expr -> expr OR expr 
+-- On OR reduce production expr -> expr OR expr 
+-- On NEWLINE reduce production expr -> expr OR expr 
+-- On COMMA reduce production expr -> expr OR expr 
+-- On COLON reduce production expr -> expr OR expr 
+
+State 36:
+expr -> expr MINUS . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 37
+
+State 37:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr MINUS expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On MOD shift to state 30
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On RSQ reduce production expr -> expr MINUS expr 
+-- On RP reduce production expr -> expr MINUS expr 
+-- On PLUS reduce production expr -> expr MINUS expr 
+-- On OR reduce production expr -> expr MINUS expr 
+-- On NEWLINE reduce production expr -> expr MINUS expr 
+-- On MINUS reduce production expr -> expr MINUS expr 
+-- On COMMA reduce production expr -> expr MINUS expr 
+-- On COLON reduce production expr -> expr MINUS expr 
+-- On CMP reduce production expr -> expr MINUS expr 
+-- On AND reduce production expr -> expr MINUS expr 
+
+State 38:
+expr -> expr CMP . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 39
+
+State 39:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr CMP expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On RSQ reduce production expr -> expr CMP expr 
+-- On RP reduce production expr -> expr CMP expr 
+-- On OR reduce production expr -> expr CMP expr 
+-- On NEWLINE reduce production expr -> expr CMP expr 
+-- On COMMA reduce production expr -> expr CMP expr 
+-- On COLON reduce production expr -> expr CMP expr 
+-- On AND reduce production expr -> expr CMP expr 
+
+State 40:
+expr -> expr AND . expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 41
+
+State 41:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr AND expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On RSQ reduce production expr -> expr AND expr 
+-- On RP reduce production expr -> expr AND expr 
+-- On OR reduce production expr -> expr AND expr 
+-- On NEWLINE reduce production expr -> expr AND expr 
+-- On COMMA reduce production expr -> expr AND expr 
+-- On COLON reduce production expr -> expr AND expr 
+-- On AND reduce production expr -> expr AND expr 
+
+State 42:
+separated_nonempty_list(COMMA,expr) -> expr COMMA . separated_nonempty_list(COMMA,expr) [ RSQ RP ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On separated_nonempty_list(COMMA,expr) shift to state 43
+-- On ident shift to state 17
+-- On expr shift to state 22
+
+State 43:
+separated_nonempty_list(COMMA,expr) -> expr COMMA separated_nonempty_list(COMMA,expr) . [ RSQ RP ]
+-- On RSQ reduce production separated_nonempty_list(COMMA,expr) -> expr COMMA separated_nonempty_list(COMMA,expr) 
+-- On RP reduce production separated_nonempty_list(COMMA,expr) -> expr COMMA separated_nonempty_list(COMMA,expr) 
+
+State 44:
+expr -> expr . LSQ expr RSQ [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> LP expr . RP [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On RP shift to state 45
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+
+State 45:
+expr -> LP expr RP . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES reduce production expr -> LP expr RP 
+-- On RSQ reduce production expr -> LP expr RP 
+-- On RP reduce production expr -> LP expr RP 
+-- On PLUS reduce production expr -> LP expr RP 
+-- On OR reduce production expr -> LP expr RP 
+-- On NEWLINE reduce production expr -> LP expr RP 
+-- On MOD reduce production expr -> LP expr RP 
+-- On MINUS reduce production expr -> LP expr RP 
+-- On LSQ reduce production expr -> LP expr RP 
+-- On DIV reduce production expr -> LP expr RP 
+-- On COMMA reduce production expr -> LP expr RP 
+-- On COLON reduce production expr -> LP expr RP 
+-- On CMP reduce production expr -> LP expr RP 
+-- On AND reduce production expr -> LP expr RP 
+
+State 46:
+expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) . RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On RSQ shift to state 47
+
+State 47:
+expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On RSQ reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On RP reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On PLUS reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On OR reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On NEWLINE reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On MOD reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On MINUS reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On LSQ reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On DIV reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On COMMA reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On COLON reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On CMP reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+-- On AND reduce production expr -> LSQ loption(separated_nonempty_list(COMMA,expr)) RSQ 
+
+State 48:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> MINUS expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On LSQ shift to state 25
+-- On TIMES reduce production expr -> MINUS expr 
+-- On RSQ reduce production expr -> MINUS expr 
+-- On RP reduce production expr -> MINUS expr 
+-- On PLUS reduce production expr -> MINUS expr 
+-- On OR reduce production expr -> MINUS expr 
+-- On NEWLINE reduce production expr -> MINUS expr 
+-- On MOD reduce production expr -> MINUS expr 
+-- On MINUS reduce production expr -> MINUS expr 
+-- On DIV reduce production expr -> MINUS expr 
+-- On COMMA reduce production expr -> MINUS expr 
+-- On COLON reduce production expr -> MINUS expr 
+-- On CMP reduce production expr -> MINUS expr 
+-- On AND reduce production expr -> MINUS expr 
+
+State 49:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> NOT expr . [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ RP PLUS OR NEWLINE MOD MINUS LSQ DIV COMMA COLON CMP AND ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On RSQ reduce production expr -> NOT expr 
+-- On RP reduce production expr -> NOT expr 
+-- On OR reduce production expr -> NOT expr 
+-- On NEWLINE reduce production expr -> NOT expr 
+-- On COMMA reduce production expr -> NOT expr 
+-- On COLON reduce production expr -> NOT expr 
+-- On AND reduce production expr -> NOT expr 
+
+State 50:
+expr -> expr . LSQ expr RSQ [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> RETURN expr . [ NEWLINE ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+-- On NEWLINE reduce production simple_stmt -> RETURN expr 
+
+State 51:
+simple_stmt -> PRINT . LP expr RP [ NEWLINE ]
+-- On LP shift to state 52
+
+State 52:
+simple_stmt -> PRINT LP . expr RP [ NEWLINE ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 53
+
+State 53:
+expr -> expr . LSQ expr RSQ [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES RP PLUS OR MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> PRINT LP expr . RP [ NEWLINE ]
+-- On TIMES shift to state 23
+-- On RP shift to state 54
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+
+State 54:
+simple_stmt -> PRINT LP expr RP . [ NEWLINE ]
+-- On NEWLINE reduce production simple_stmt -> PRINT LP expr RP 
+
+State 55:
+suite -> NEWLINE . BEGIN nonempty_list(stmt) END [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END ELSE DEF CST ]
+-- On BEGIN shift to state 56
+
+State 56:
+suite -> NEWLINE BEGIN . nonempty_list(stmt) END [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END ELSE DEF CST ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IF shift to state 57
+-- On IDENT shift to state 4
+-- On FOR shift to state 75
+-- On CST shift to state 16
+-- On stmt shift to state 81
+-- On simple_stmt shift to state 82
+-- On nonempty_list(stmt) shift to state 85
+-- On ident shift to state 66
+-- On expr shift to state 69
+
+State 57:
+stmt -> IF . expr COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+stmt -> IF . expr COLON suite ELSE COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 58
+
+State 58:
+expr -> expr . LSQ expr RSQ [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . AND expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . OR expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+stmt -> IF expr . COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+stmt -> IF expr . COLON suite ELSE COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On COLON shift to state 59
+-- On CMP shift to state 38
+-- On AND shift to state 40
+
+State 59:
+stmt -> IF expr COLON . suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+stmt -> IF expr COLON . suite ELSE COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On NEWLINE shift to state 55
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On suite shift to state 60
+-- On simple_stmt shift to state 64
+-- On ident shift to state 66
+-- On expr shift to state 69
+
+State 60:
+stmt -> IF expr COLON suite . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+stmt -> IF expr COLON suite . ELSE COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On ELSE shift to state 61
+-- On RETURN reduce production stmt -> IF expr COLON suite 
+-- On PRINT reduce production stmt -> IF expr COLON suite 
+-- On NOT reduce production stmt -> IF expr COLON suite 
+-- On MINUS reduce production stmt -> IF expr COLON suite 
+-- On LSQ reduce production stmt -> IF expr COLON suite 
+-- On LP reduce production stmt -> IF expr COLON suite 
+-- On IF reduce production stmt -> IF expr COLON suite 
+-- On IDENT reduce production stmt -> IF expr COLON suite 
+-- On FOR reduce production stmt -> IF expr COLON suite 
+-- On EOF reduce production stmt -> IF expr COLON suite 
+-- On END reduce production stmt -> IF expr COLON suite 
+-- On CST reduce production stmt -> IF expr COLON suite 
+
+State 61:
+stmt -> IF expr COLON suite ELSE . COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On COLON shift to state 62
+
+State 62:
+stmt -> IF expr COLON suite ELSE COLON . suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On NEWLINE shift to state 55
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On suite shift to state 63
+-- On simple_stmt shift to state 64
+-- On ident shift to state 66
+-- On expr shift to state 69
+
+State 63:
+stmt -> IF expr COLON suite ELSE COLON suite . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On RETURN reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On PRINT reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On NOT reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On MINUS reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On LSQ reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On LP reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On IF reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On IDENT reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On FOR reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On EOF reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On END reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+-- On CST reduce production stmt -> IF expr COLON suite ELSE COLON suite 
+
+State 64:
+suite -> simple_stmt . NEWLINE [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END ELSE DEF CST ]
+-- On NEWLINE shift to state 65
+
+State 65:
+suite -> simple_stmt NEWLINE . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END ELSE DEF CST ]
+-- On RETURN reduce production suite -> simple_stmt NEWLINE 
+-- On PRINT reduce production suite -> simple_stmt NEWLINE 
+-- On NOT reduce production suite -> simple_stmt NEWLINE 
+-- On MINUS reduce production suite -> simple_stmt NEWLINE 
+-- On LSQ reduce production suite -> simple_stmt NEWLINE 
+-- On LP reduce production suite -> simple_stmt NEWLINE 
+-- On IF reduce production suite -> simple_stmt NEWLINE 
+-- On IDENT reduce production suite -> simple_stmt NEWLINE 
+-- On FOR reduce production suite -> simple_stmt NEWLINE 
+-- On EOF reduce production suite -> simple_stmt NEWLINE 
+-- On END reduce production suite -> simple_stmt NEWLINE 
+-- On ELSE reduce production suite -> simple_stmt NEWLINE 
+-- On DEF reduce production suite -> simple_stmt NEWLINE 
+-- On CST reduce production suite -> simple_stmt NEWLINE 
+
+State 66:
+expr -> ident . [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> ident . LP loption(separated_nonempty_list(COMMA,expr)) RP [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> ident . EQUAL expr [ NEWLINE ]
+-- On LP shift to state 18
+-- On EQUAL shift to state 67
+-- On TIMES reduce production expr -> ident 
+-- On PLUS reduce production expr -> ident 
+-- On OR reduce production expr -> ident 
+-- On NEWLINE reduce production expr -> ident 
+-- On MOD reduce production expr -> ident 
+-- On MINUS reduce production expr -> ident 
+-- On LSQ reduce production expr -> ident 
+-- On DIV reduce production expr -> ident 
+-- On CMP reduce production expr -> ident 
+-- On AND reduce production expr -> ident 
+
+State 67:
+simple_stmt -> ident EQUAL . expr [ NEWLINE ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 68
+
+State 68:
+expr -> expr . LSQ expr RSQ [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> ident EQUAL expr . [ NEWLINE ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+-- On NEWLINE reduce production simple_stmt -> ident EQUAL expr 
+
+State 69:
+expr -> expr . LSQ expr RSQ [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> expr . LSQ expr RSQ EQUAL expr [ NEWLINE ]
+simple_stmt -> expr . [ NEWLINE ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 70
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+-- On NEWLINE reduce production simple_stmt -> expr 
+
+State 70:
+expr -> expr LSQ . expr RSQ [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> expr LSQ . expr RSQ EQUAL expr [ NEWLINE ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 71
+
+State 71:
+expr -> expr . LSQ expr RSQ [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr LSQ expr . RSQ [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES RSQ PLUS OR MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> expr LSQ expr . RSQ EQUAL expr [ NEWLINE ]
+-- On TIMES shift to state 23
+-- On RSQ shift to state 72
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+
+State 72:
+expr -> expr LSQ expr RSQ . [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> expr LSQ expr RSQ . EQUAL expr [ NEWLINE ]
+-- On EQUAL shift to state 73
+-- On TIMES reduce production expr -> expr LSQ expr RSQ 
+-- On PLUS reduce production expr -> expr LSQ expr RSQ 
+-- On OR reduce production expr -> expr LSQ expr RSQ 
+-- On NEWLINE reduce production expr -> expr LSQ expr RSQ 
+-- On MOD reduce production expr -> expr LSQ expr RSQ 
+-- On MINUS reduce production expr -> expr LSQ expr RSQ 
+-- On LSQ reduce production expr -> expr LSQ expr RSQ 
+-- On DIV reduce production expr -> expr LSQ expr RSQ 
+-- On CMP reduce production expr -> expr LSQ expr RSQ 
+-- On AND reduce production expr -> expr LSQ expr RSQ 
+
+State 73:
+simple_stmt -> expr LSQ expr RSQ EQUAL . expr [ NEWLINE ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 74
+
+State 74:
+expr -> expr . LSQ expr RSQ [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . MOD expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . AND expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+expr -> expr . OR expr [ TIMES PLUS OR NEWLINE MOD MINUS LSQ DIV CMP AND ]
+simple_stmt -> expr LSQ expr RSQ EQUAL expr . [ NEWLINE ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On CMP shift to state 38
+-- On AND shift to state 40
+-- On NEWLINE reduce production simple_stmt -> expr LSQ expr RSQ EQUAL expr 
+
+State 75:
+stmt -> FOR . ident IN expr COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On IDENT shift to state 4
+-- On ident shift to state 76
+
+State 76:
+stmt -> FOR ident . IN expr COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On IN shift to state 77
+
+State 77:
+stmt -> FOR ident IN . expr COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On ident shift to state 17
+-- On expr shift to state 78
+
+State 78:
+expr -> expr . LSQ expr RSQ [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . PLUS expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . MINUS expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . TIMES expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . DIV expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . MOD expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . CMP expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . AND expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+expr -> expr . OR expr [ TIMES PLUS OR MOD MINUS LSQ DIV COLON CMP AND ]
+stmt -> FOR ident IN expr . COLON suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On TIMES shift to state 23
+-- On PLUS shift to state 28
+-- On OR shift to state 34
+-- On MOD shift to state 30
+-- On MINUS shift to state 36
+-- On LSQ shift to state 25
+-- On DIV shift to state 32
+-- On COLON shift to state 79
+-- On CMP shift to state 38
+-- On AND shift to state 40
+
+State 79:
+stmt -> FOR ident IN expr COLON . suite [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On NEWLINE shift to state 55
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IDENT shift to state 4
+-- On CST shift to state 16
+-- On suite shift to state 80
+-- On simple_stmt shift to state 64
+-- On ident shift to state 66
+-- On expr shift to state 69
+
+State 80:
+stmt -> FOR ident IN expr COLON suite . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On RETURN reduce production stmt -> FOR ident IN expr COLON suite 
+-- On PRINT reduce production stmt -> FOR ident IN expr COLON suite 
+-- On NOT reduce production stmt -> FOR ident IN expr COLON suite 
+-- On MINUS reduce production stmt -> FOR ident IN expr COLON suite 
+-- On LSQ reduce production stmt -> FOR ident IN expr COLON suite 
+-- On LP reduce production stmt -> FOR ident IN expr COLON suite 
+-- On IF reduce production stmt -> FOR ident IN expr COLON suite 
+-- On IDENT reduce production stmt -> FOR ident IN expr COLON suite 
+-- On FOR reduce production stmt -> FOR ident IN expr COLON suite 
+-- On EOF reduce production stmt -> FOR ident IN expr COLON suite 
+-- On END reduce production stmt -> FOR ident IN expr COLON suite 
+-- On CST reduce production stmt -> FOR ident IN expr COLON suite 
+
+State 81:
+nonempty_list(stmt) -> stmt . [ EOF END ]
+nonempty_list(stmt) -> stmt . nonempty_list(stmt) [ EOF END ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IF shift to state 57
+-- On IDENT shift to state 4
+-- On FOR shift to state 75
+-- On CST shift to state 16
+-- On stmt shift to state 81
+-- On simple_stmt shift to state 82
+-- On nonempty_list(stmt) shift to state 84
+-- On ident shift to state 66
+-- On expr shift to state 69
+-- On EOF reduce production nonempty_list(stmt) -> stmt 
+-- On END reduce production nonempty_list(stmt) -> stmt 
+
+State 82:
+stmt -> simple_stmt . NEWLINE [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On NEWLINE shift to state 83
+
+State 83:
+stmt -> simple_stmt NEWLINE . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END CST ]
+-- On RETURN reduce production stmt -> simple_stmt NEWLINE 
+-- On PRINT reduce production stmt -> simple_stmt NEWLINE 
+-- On NOT reduce production stmt -> simple_stmt NEWLINE 
+-- On MINUS reduce production stmt -> simple_stmt NEWLINE 
+-- On LSQ reduce production stmt -> simple_stmt NEWLINE 
+-- On LP reduce production stmt -> simple_stmt NEWLINE 
+-- On IF reduce production stmt -> simple_stmt NEWLINE 
+-- On IDENT reduce production stmt -> simple_stmt NEWLINE 
+-- On FOR reduce production stmt -> simple_stmt NEWLINE 
+-- On EOF reduce production stmt -> simple_stmt NEWLINE 
+-- On END reduce production stmt -> simple_stmt NEWLINE 
+-- On CST reduce production stmt -> simple_stmt NEWLINE 
+
+State 84:
+nonempty_list(stmt) -> stmt nonempty_list(stmt) . [ EOF END ]
+-- On EOF reduce production nonempty_list(stmt) -> stmt nonempty_list(stmt) 
+-- On END reduce production nonempty_list(stmt) -> stmt nonempty_list(stmt) 
+
+State 85:
+suite -> NEWLINE BEGIN nonempty_list(stmt) . END [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END ELSE DEF CST ]
+-- On END shift to state 86
+
+State 86:
+suite -> NEWLINE BEGIN nonempty_list(stmt) END . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR EOF END ELSE DEF CST ]
+-- On RETURN reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On PRINT reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On NOT reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On MINUS reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On LSQ reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On LP reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On IF reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On IDENT reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On FOR reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On EOF reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On END reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On ELSE reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On DEF reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+-- On CST reduce production suite -> NEWLINE BEGIN nonempty_list(stmt) END 
+
+State 87:
+def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR DEF CST ]
+-- On RETURN reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On PRINT reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On NOT reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On MINUS reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On LSQ reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On LP reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On IF reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On IDENT reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On FOR reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On DEF reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+-- On CST reduce production def -> DEF ident LP loption(separated_nonempty_list(COMMA,ident)) RP COLON suite 
+
+State 88:
+separated_nonempty_list(COMMA,ident) -> ident . [ RP ]
+separated_nonempty_list(COMMA,ident) -> ident . COMMA separated_nonempty_list(COMMA,ident) [ RP ]
+-- On COMMA shift to state 89
+-- On RP reduce production separated_nonempty_list(COMMA,ident) -> ident 
+
+State 89:
+separated_nonempty_list(COMMA,ident) -> ident COMMA . separated_nonempty_list(COMMA,ident) [ RP ]
+-- On IDENT shift to state 4
+-- On separated_nonempty_list(COMMA,ident) shift to state 90
+-- On ident shift to state 88
+
+State 90:
+separated_nonempty_list(COMMA,ident) -> ident COMMA separated_nonempty_list(COMMA,ident) . [ RP ]
+-- On RP reduce production separated_nonempty_list(COMMA,ident) -> ident COMMA separated_nonempty_list(COMMA,ident) 
+
+State 91:
+file -> option(NEWLINE) list(def) . nonempty_list(stmt) EOF [ # ]
+-- On RETURN shift to state 11
+-- On PRINT shift to state 51
+-- On NOT shift to state 12
+-- On MINUS shift to state 13
+-- On LSQ shift to state 14
+-- On LP shift to state 15
+-- On IF shift to state 57
+-- On IDENT shift to state 4
+-- On FOR shift to state 75
+-- On CST shift to state 16
+-- On stmt shift to state 81
+-- On simple_stmt shift to state 82
+-- On nonempty_list(stmt) shift to state 92
+-- On ident shift to state 66
+-- On expr shift to state 69
+
+State 92:
+file -> option(NEWLINE) list(def) nonempty_list(stmt) . EOF [ # ]
+-- On EOF shift to state 93
+
+State 93:
+file -> option(NEWLINE) list(def) nonempty_list(stmt) EOF . [ # ]
+-- On # reduce production file -> option(NEWLINE) list(def) nonempty_list(stmt) EOF 
+
+State 94:
+list(def) -> def . list(def) [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR CST ]
+-- On DEF shift to state 3
+-- On list(def) shift to state 95
+-- On def shift to state 94
+-- On RETURN reduce production list(def) -> 
+-- On PRINT reduce production list(def) -> 
+-- On NOT reduce production list(def) -> 
+-- On MINUS reduce production list(def) -> 
+-- On LSQ reduce production list(def) -> 
+-- On LP reduce production list(def) -> 
+-- On IF reduce production list(def) -> 
+-- On IDENT reduce production list(def) -> 
+-- On FOR reduce production list(def) -> 
+-- On CST reduce production list(def) -> 
+
+State 95:
+list(def) -> def list(def) . [ RETURN PRINT NOT MINUS LSQ LP IF IDENT FOR CST ]
+-- On RETURN reduce production list(def) -> def list(def) 
+-- On PRINT reduce production list(def) -> def list(def) 
+-- On NOT reduce production list(def) -> def list(def) 
+-- On MINUS reduce production list(def) -> def list(def) 
+-- On LSQ reduce production list(def) -> def list(def) 
+-- On LP reduce production list(def) -> def list(def) 
+-- On IF reduce production list(def) -> def list(def) 
+-- On IDENT reduce production list(def) -> def list(def) 
+-- On FOR reduce production list(def) -> def list(def) 
+-- On CST reduce production list(def) -> def list(def) 
+
+State 96:
+file' -> file . [ # ]
+-- On # accept file
+

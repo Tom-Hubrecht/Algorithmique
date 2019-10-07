@@ -1,0 +1,326 @@
+State 0:
+prog' -> . prog [ # ]
+-- On SET shift to state 1
+-- On PRINT shift to state 26
+-- On stmts shift to state 28
+-- On stmt shift to state 31
+-- On prog shift to state 32
+
+State 1:
+stmt -> SET . IDENT EQ expr [ SET PRINT EOF ]
+-- On IDENT shift to state 2
+
+State 2:
+stmt -> SET IDENT . EQ expr [ SET PRINT EOF ]
+-- On EQ shift to state 3
+
+State 3:
+stmt -> SET IDENT EQ . expr [ SET PRINT EOF ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 25
+
+State 4:
+expr -> MINUS . expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 24
+
+State 5:
+expr -> LP . expr RP [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 22
+
+State 6:
+expr -> LET . IDENT EQ expr IN expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On IDENT shift to state 7
+
+State 7:
+expr -> LET IDENT . EQ expr IN expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On EQ shift to state 8
+
+State 8:
+expr -> LET IDENT EQ . expr IN expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 11
+
+State 9:
+expr -> IDENT . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES reduce production expr -> IDENT 
+-- On SET reduce production expr -> IDENT 
+-- On RP reduce production expr -> IDENT 
+-- On PRINT reduce production expr -> IDENT 
+-- On PLUS reduce production expr -> IDENT 
+-- On MINUS reduce production expr -> IDENT 
+-- On IN reduce production expr -> IDENT 
+-- On EOF reduce production expr -> IDENT 
+-- On DIV reduce production expr -> IDENT 
+
+State 10:
+expr -> CST . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES reduce production expr -> CST 
+-- On SET reduce production expr -> CST 
+-- On RP reduce production expr -> CST 
+-- On PRINT reduce production expr -> CST 
+-- On PLUS reduce production expr -> CST 
+-- On MINUS reduce production expr -> CST 
+-- On IN reduce production expr -> CST 
+-- On EOF reduce production expr -> CST 
+-- On DIV reduce production expr -> CST 
+
+State 11:
+expr -> expr . PLUS expr [ TIMES PLUS MINUS IN DIV ]
+expr -> expr . MINUS expr [ TIMES PLUS MINUS IN DIV ]
+expr -> expr . TIMES expr [ TIMES PLUS MINUS IN DIV ]
+expr -> expr . DIV expr [ TIMES PLUS MINUS IN DIV ]
+expr -> LET IDENT EQ expr . IN expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES shift to state 12
+-- On PLUS shift to state 14
+-- On MINUS shift to state 18
+-- On IN shift to state 20
+-- On DIV shift to state 16
+
+State 12:
+expr -> expr TIMES . expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 13
+
+State 13:
+expr -> expr . PLUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr TIMES expr . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES reduce production expr -> expr TIMES expr 
+-- On SET reduce production expr -> expr TIMES expr 
+-- On RP reduce production expr -> expr TIMES expr 
+-- On PRINT reduce production expr -> expr TIMES expr 
+-- On PLUS reduce production expr -> expr TIMES expr 
+-- On MINUS reduce production expr -> expr TIMES expr 
+-- On IN reduce production expr -> expr TIMES expr 
+-- On EOF reduce production expr -> expr TIMES expr 
+-- On DIV reduce production expr -> expr TIMES expr 
+
+State 14:
+expr -> expr PLUS . expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 15
+
+State 15:
+expr -> expr . PLUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr PLUS expr . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES shift to state 12
+-- On DIV shift to state 16
+-- On SET reduce production expr -> expr PLUS expr 
+-- On RP reduce production expr -> expr PLUS expr 
+-- On PRINT reduce production expr -> expr PLUS expr 
+-- On PLUS reduce production expr -> expr PLUS expr 
+-- On MINUS reduce production expr -> expr PLUS expr 
+-- On IN reduce production expr -> expr PLUS expr 
+-- On EOF reduce production expr -> expr PLUS expr 
+
+State 16:
+expr -> expr DIV . expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 17
+
+State 17:
+expr -> expr . PLUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr DIV expr . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES reduce production expr -> expr DIV expr 
+-- On SET reduce production expr -> expr DIV expr 
+-- On RP reduce production expr -> expr DIV expr 
+-- On PRINT reduce production expr -> expr DIV expr 
+-- On PLUS reduce production expr -> expr DIV expr 
+-- On MINUS reduce production expr -> expr DIV expr 
+-- On IN reduce production expr -> expr DIV expr 
+-- On EOF reduce production expr -> expr DIV expr 
+-- On DIV reduce production expr -> expr DIV expr 
+
+State 18:
+expr -> expr MINUS . expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 19
+
+State 19:
+expr -> expr . PLUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr MINUS expr . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES shift to state 12
+-- On DIV shift to state 16
+-- On SET reduce production expr -> expr MINUS expr 
+-- On RP reduce production expr -> expr MINUS expr 
+-- On PRINT reduce production expr -> expr MINUS expr 
+-- On PLUS reduce production expr -> expr MINUS expr 
+-- On MINUS reduce production expr -> expr MINUS expr 
+-- On IN reduce production expr -> expr MINUS expr 
+-- On EOF reduce production expr -> expr MINUS expr 
+
+State 20:
+expr -> LET IDENT EQ expr IN . expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 21
+
+State 21:
+expr -> expr . PLUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> LET IDENT EQ expr IN expr . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES shift to state 12
+-- On PLUS shift to state 14
+-- On MINUS shift to state 18
+-- On DIV shift to state 16
+-- On SET reduce production expr -> LET IDENT EQ expr IN expr 
+-- On RP reduce production expr -> LET IDENT EQ expr IN expr 
+-- On PRINT reduce production expr -> LET IDENT EQ expr IN expr 
+-- On IN reduce production expr -> LET IDENT EQ expr IN expr 
+-- On EOF reduce production expr -> LET IDENT EQ expr IN expr 
+
+State 22:
+expr -> expr . PLUS expr [ TIMES RP PLUS MINUS DIV ]
+expr -> expr . MINUS expr [ TIMES RP PLUS MINUS DIV ]
+expr -> expr . TIMES expr [ TIMES RP PLUS MINUS DIV ]
+expr -> expr . DIV expr [ TIMES RP PLUS MINUS DIV ]
+expr -> LP expr . RP [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES shift to state 12
+-- On RP shift to state 23
+-- On PLUS shift to state 14
+-- On MINUS shift to state 18
+-- On DIV shift to state 16
+
+State 23:
+expr -> LP expr RP . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES reduce production expr -> LP expr RP 
+-- On SET reduce production expr -> LP expr RP 
+-- On RP reduce production expr -> LP expr RP 
+-- On PRINT reduce production expr -> LP expr RP 
+-- On PLUS reduce production expr -> LP expr RP 
+-- On MINUS reduce production expr -> LP expr RP 
+-- On IN reduce production expr -> LP expr RP 
+-- On EOF reduce production expr -> LP expr RP 
+-- On DIV reduce production expr -> LP expr RP 
+
+State 24:
+expr -> expr . PLUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+expr -> MINUS expr . [ TIMES SET RP PRINT PLUS MINUS IN EOF DIV ]
+-- On TIMES reduce production expr -> MINUS expr 
+-- On SET reduce production expr -> MINUS expr 
+-- On RP reduce production expr -> MINUS expr 
+-- On PRINT reduce production expr -> MINUS expr 
+-- On PLUS reduce production expr -> MINUS expr 
+-- On MINUS reduce production expr -> MINUS expr 
+-- On IN reduce production expr -> MINUS expr 
+-- On EOF reduce production expr -> MINUS expr 
+-- On DIV reduce production expr -> MINUS expr 
+
+State 25:
+expr -> expr . PLUS expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+stmt -> SET IDENT EQ expr . [ SET PRINT EOF ]
+-- On TIMES shift to state 12
+-- On PLUS shift to state 14
+-- On MINUS shift to state 18
+-- On DIV shift to state 16
+-- On SET reduce production stmt -> SET IDENT EQ expr 
+-- On PRINT reduce production stmt -> SET IDENT EQ expr 
+-- On EOF reduce production stmt -> SET IDENT EQ expr 
+
+State 26:
+stmt -> PRINT . expr [ SET PRINT EOF ]
+-- On MINUS shift to state 4
+-- On LP shift to state 5
+-- On LET shift to state 6
+-- On IDENT shift to state 9
+-- On CST shift to state 10
+-- On expr shift to state 27
+
+State 27:
+expr -> expr . PLUS expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+expr -> expr . MINUS expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+expr -> expr . TIMES expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+expr -> expr . DIV expr [ TIMES SET PRINT PLUS MINUS EOF DIV ]
+stmt -> PRINT expr . [ SET PRINT EOF ]
+-- On TIMES shift to state 12
+-- On PLUS shift to state 14
+-- On MINUS shift to state 18
+-- On DIV shift to state 16
+-- On SET reduce production stmt -> PRINT expr 
+-- On PRINT reduce production stmt -> PRINT expr 
+-- On EOF reduce production stmt -> PRINT expr 
+
+State 28:
+prog -> stmts . EOF [ # ]
+stmts -> stmts . stmt [ SET PRINT EOF ]
+-- On SET shift to state 1
+-- On PRINT shift to state 26
+-- On EOF shift to state 29
+-- On stmt shift to state 30
+
+State 29:
+prog -> stmts EOF . [ # ]
+-- On # reduce production prog -> stmts EOF 
+
+State 30:
+stmts -> stmts stmt . [ SET PRINT EOF ]
+-- On SET reduce production stmts -> stmts stmt 
+-- On PRINT reduce production stmts -> stmts stmt 
+-- On EOF reduce production stmts -> stmts stmt 
+
+State 31:
+stmts -> stmt . [ SET PRINT EOF ]
+-- On SET reduce production stmts -> stmt 
+-- On PRINT reduce production stmts -> stmt 
+-- On EOF reduce production stmts -> stmt 
+
+State 32:
+prog' -> prog . [ # ]
+-- On # accept prog
+
