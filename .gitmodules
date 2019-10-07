@@ -1,0 +1,6 @@
+[submodule "sysnum-tp1-2019"]
+    path = "Systèmes_Numériques/sysnum-tp1-2019"
+    url = "https://github.com/GAJaloyan/sysnum-tp1-2019"
+[submodule "Systemes-Numeriques/sysnum-tp1-2019"]
+	path = Systemes-Numeriques/sysnum-tp1-2019
+	url = https://github.com/GAJaloyan/sysnum-tp1-2019
